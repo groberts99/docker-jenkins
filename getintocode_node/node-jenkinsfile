@@ -57,7 +57,7 @@ spec:
         }
         stage('run') {
             steps {
-              container('docker'){
+            //   container('docker'){
                 // snykSecurity organisation: 'stayclassylondon99', 
                 // projectName: 'docker-build-test-node', 
                 // severity: 'medium', 
@@ -65,7 +65,7 @@ spec:
                 // snykTokenId: 'Synk', 
                 // targetFile: './getintocode_node/package.json'
                snykSecurity snykInstallation: 'Synk', snykTokenId: 'Snyk-Jenkins', targetFile: 'Dockerfile'
-              }
+            //   }
             }
         }
         // stage('Build') {
