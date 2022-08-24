@@ -81,7 +81,8 @@ spec:
                 targetFile: 'package.json',
                 failOnIssues: 'true'
                 )		
-      }
+            }
+        }
         // stage('Build') {
         //     echo "Build"
         // }
