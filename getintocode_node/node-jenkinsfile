@@ -63,7 +63,7 @@ spec:
                 severity: 'medium', 
                 snykInstallation: 'Synk', 
                 snykTokenId: 'Snyk', 
-                targetFile: 'package.json'
+                targetFile: './getintocode_node/package.json'
               }
             }
         }
