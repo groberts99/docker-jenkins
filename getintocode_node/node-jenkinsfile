@@ -1,0 +1,68 @@
+pipeline {
+    agent {
+        kubernetes {
+            // Rather than inline YAML, in a multibranch Pipeline you could use: yamlFile 'jenkins-pod.yaml'
+            // Or, to avoid YAML:
+            // containerTemplate {
+            //     name 'shell'
+            //     image 'ubuntu'
+            //     command 'sleep'
+            //     args 'infinity'
+            // }
+            yaml '''
+apiVersion: v1
+kind: Pod
+spec:
+  serviceAccountName: jenkins-admin
+  containers:
+  - name: docker
+    image: docker:latest
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+      - mountPath: /var/run/docker.sock
+        name: docker-sock
+  volumes:
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock  
+  
+'''
+            // Can also wrap individual steps:
+            // container('shell') {
+            //     sh 'hostname'
+            // }
+            defaultContainer 'shell'
+        }
+    }
+    stages {
+        // stage('check_files') {
+        //     steps {
+        //       container('shell'){
+        //       sh '''
+        //         ls -l
+        //       '''
+        //       }
+        //     }
+        // }
+        stage('build') {
+            steps {
+              container('docker'){
+              sh '''
+                docker build -t hellonode ./getintocode_node
+              '''
+              }
+            }
+        }
+        stage('run') {
+            steps {
+              container('docker'){
+              sh '''
+                docker run --rm hellonode
+              '''
+              }
+            }
+        }
+    }
+}
