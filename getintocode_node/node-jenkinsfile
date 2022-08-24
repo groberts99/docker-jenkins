@@ -69,9 +69,9 @@ spec:
         //     }
         // }
         stage('snyk dependency scan') {
-            tools {
-                snyk 'snyk-latest'
-            }	
+            // tools {
+            tool name: 'synk-latest', type: 'snyk'
+            // }	
             steps {
                 snykSecurity(
                 // organisation: 'cloudbees',
