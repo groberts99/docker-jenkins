@@ -29,6 +29,15 @@ spec:
         }
     }
     stages {
+        stage('install_docker') {
+            steps {
+              sh '''
+                sudo apt install docker.io
+                sudo usermod -aG docker $USER
+                sudo usermod -aG docker jenkins  
+              '''
+            }
+        }
         stage('check_files') {
             steps {
               sh '''
