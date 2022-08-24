@@ -14,8 +14,20 @@ apiVersion: v1
 kind: Pod
 spec:
   containers:
-  - name: shell
+  - name: docker
     image: docker:latest
+    command:
+    - cat
+    tty: true
+    volumeMounts:
+      - mountPath: /var/run/docker.sock
+        name: docker-sock
+  volumes:
+  - name: docker-sock
+    hostPath:
+      path: /var/run/docker.sock  
+  - name: shell
+    image: ubuntu
     command:
     - sleep
     args:
@@ -29,34 +41,31 @@ spec:
         }
     }
     stages {
-        stage('install_docker') {
-            steps {
-              sh '''
-                sudo apt install docker.io
-                sudo usermod -aG docker $USER
-                sudo usermod -aG docker jenkins  
-              '''
-            }
-        }
         stage('check_files') {
             steps {
+              container('shell'){
               sh '''
                 ls -l
               '''
+              }
             }
         }
         stage('build') {
             steps {
+              container('docker'){
               sh '''
                 docker build -t hello_there ./hello_world_docker
               '''
+              }
             }
         }
         stage('run') {
             steps {
+              container('docker'){
               sh '''
                 docker run --rm hello_there
               '''
+              }
             }
         }
     }
