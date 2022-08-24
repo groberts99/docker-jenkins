@@ -64,7 +64,7 @@ spec:
                 // snykInstallation: 'Synk', 
                 // snykTokenId: 'Synk', 
                 // targetFile: './getintocode_node/package.json'
-               snykSecurity snykInstallation: 'Synk', snykTokenId: 'Snyk-Jenkins', targetFile: 'package.json'
+               snykSecurity snykInstallation: 'Synk', snykTokenId: 'Snyk-Jenkins', targetFile: './getintocode_node/package.json'
             //   }
             }
         }
