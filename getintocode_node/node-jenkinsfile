@@ -68,22 +68,29 @@ spec:
         //       }
         //     }
         // }
-        stage('snyk dependency scan') {
-            tools {
-                'synk-latest', type: 'snyk'
-            }	
+        stage('snyk dependency scan install') {
             steps {
-                
-                snykSecurity(
-                // organisation: 'cloudbees',
-                severity: 'low',
-                snykInstallation: 'snyk-latest',
-                snykTokenId: 'Snyk-Jenkins',
-                targetFile: 'package.json',
-                failOnIssues: 'true'
-                )		
+                container('docker'){
+                    sh 'npm install -g snyk'
+                }
             }
         }
+        // stage('snyk dependency scan ') {
+        //     tools {
+        //         'synk-latest', type: 'snyk'
+        //     }	
+        //     steps {
+                
+        //         snykSecurity(
+        //         // organisation: 'cloudbees',
+        //         severity: 'low',
+        //         snykInstallation: 'snyk-latest',
+        //         snykTokenId: 'Snyk-Jenkins',
+        //         targetFile: 'package.json',
+        //         failOnIssues: 'true'
+        //         )		
+        //     }
+        // }
         // stage('Build') {
         //     echo "Build"
         // }
