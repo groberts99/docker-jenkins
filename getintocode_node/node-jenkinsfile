@@ -58,14 +58,12 @@ spec:
         stage('run') {
             steps {
               container('docker'){
-                snykSecurity(
-                    snykSecurity organisation: 'stayclassylondon99', 
-                    projectName: 'docker-build-test-node', 
-                    severity: 'medium', 
-                    snykInstallation: 'Synk', 
-                    snykTokenId: 'Snyk', 
-                    targetFile: './getintocode_node/package.json'
-                )
+                snykSecurity organisation: 'stayclassylondon99', 
+                projectName: 'docker-build-test-node', 
+                severity: 'medium', 
+                snykInstallation: 'Synk', 
+                snykTokenId: 'This is Snyk org id', 
+                targetFile: './getintocode_node/package.json'
               }
             }
         }
