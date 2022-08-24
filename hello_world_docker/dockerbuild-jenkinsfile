@@ -29,6 +29,13 @@ spec:
         }
     }
     stages {
+        stage('check_files') {
+            steps {
+              sh '''
+                ls -l
+              '''
+            }
+        }
         stage('build') {
             steps {
               sh '''
