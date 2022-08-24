@@ -15,12 +15,6 @@ kind: Pod
 spec:
   serviceAccountName: jenkins-admin
   containers:
-  // - name: shell
-  //   image: ubuntu
-  //   command:
-  //   - sleep
-  //   args:
-  //   - infinity
   - name: docker
     image: docker:latest
     command:
