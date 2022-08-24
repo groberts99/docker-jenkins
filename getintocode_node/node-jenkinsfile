@@ -64,7 +64,7 @@ spec:
                 // snykInstallation: 'Synk', 
                 // snykTokenId: 'Synk', 
                 // targetFile: './getintocode_node/package.json'
-               snykSecurity snykInstallation: 'Snyk-plugin', snykTokenId: 'Snyk', targetFile: 'Dockerfile'
+               snykSecurity snykInstallation: 'Snyk', snykTokenId: 'Snyk', targetFile: 'Dockerfile'
               }
             }
         }
