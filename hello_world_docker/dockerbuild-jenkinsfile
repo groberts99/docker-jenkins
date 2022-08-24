@@ -13,7 +13,14 @@ pipeline {
 apiVersion: v1
 kind: Pod
 spec:
+  serviceAccountName: jenkins-admin
   containers:
+  // - name: shell
+  //   image: ubuntu
+  //   command:
+  //   - sleep
+  //   args:
+  //   - infinity
   - name: docker
     image: docker:latest
     command:
@@ -26,12 +33,7 @@ spec:
   - name: docker-sock
     hostPath:
       path: /var/run/docker.sock  
-  - name: shell
-    image: ubuntu
-    command:
-    - sleep
-    args:
-    - infinity
+  
 '''
             // Can also wrap individual steps:
             // container('shell') {
@@ -41,15 +43,15 @@ spec:
         }
     }
     stages {
-        stage('check_files') {
-            steps {
-              container('shell'){
-              sh '''
-                ls -l
-              '''
-              }
-            }
-        }
+        // stage('check_files') {
+        //     steps {
+        //       container('shell'){
+        //       sh '''
+        //         ls -l
+        //       '''
+        //       }
+        //     }
+        // }
         stage('build') {
             steps {
               container('docker'){
