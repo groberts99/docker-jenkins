@@ -68,11 +68,23 @@ spec:
         //       }
         //     }
         // }
-        stage('snyk dependency scan install') {
-            steps {
-                container('docker'){
-                    sh 'npm install -g snyk'
+        stage('snyk dependency scan') {
+            agent {
+                docker {
+                image 'snyk/snyk-cli:python-3'
                 }
+            }
+            environment {
+                SNYK_TOKEN = credentials('snyk-token')
+            }	
+            steps {
+                sh """
+                pip install -r requirements.txt
+                snyk auth ${SNYK_TOKEN}
+                snyk test --json \
+                    --severity-threshold=medium \
+                    --file=package.json \
+                """		
             }
         }
         // stage('snyk dependency scan ') {
