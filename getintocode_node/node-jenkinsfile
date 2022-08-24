@@ -70,13 +70,13 @@ spec:
         // }
         stage('snyk dependency scan') {
             tools {
-                snyk 'Snyk'
+                snyk 'snyk-latest'
             }	
             steps {
                 snykSecurity(
                 // organisation: 'cloudbees',
                 severity: 'low',
-                snykInstallation: 'snyk-latest',
+                snykInstallation: 'Snyk',
                 snykTokenId: 'Snyk-Jenkins',
                 targetFile: 'package.json',
                 failOnIssues: 'true'
