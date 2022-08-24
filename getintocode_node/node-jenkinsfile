@@ -62,7 +62,7 @@ spec:
                 projectName: 'docker-build-test-node', 
                 severity: 'medium', 
                 snykInstallation: 'Synk', 
-                snykTokenId: 'This is Snyk org id', 
+                snykTokenId: 'Synk', 
                 targetFile: './getintocode_node/package.json'
               }
             }
