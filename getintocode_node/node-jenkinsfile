@@ -55,19 +55,33 @@ spec:
               }
             }
         }
-        stage('run') {
+        // stage('run') {
+        //     steps {
+        //       container('docker'){
+        //         // snykSecurity organisation: 'stayclassylondon99', 
+        //         // projectName: 'docker-build-test-node', 
+        //         // severity: 'medium', 
+        //         // snykInstallation: 'Synk', 
+        //         // snykTokenId: 'Synk', 
+        //         // targetFile: './getintocode_node/package.json'
+        //        snykSecurity snykInstallation: 'Synk', snykTokenId: 'Snyk-Jenkins', targetFile: './getintocode_node/package.json'
+        //       }
+        //     }
+        // }
+        stage('snyk dependency scan') {
+            tools {
+                snyk 'Snyk'
+            }	
             steps {
-              container('docker'){
-                // snykSecurity organisation: 'stayclassylondon99', 
-                // projectName: 'docker-build-test-node', 
-                // severity: 'medium', 
-                // snykInstallation: 'Synk', 
-                // snykTokenId: 'Synk', 
-                // targetFile: './getintocode_node/package.json'
-               snykSecurity snykInstallation: 'Synk', snykTokenId: 'Snyk-Jenkins', targetFile: './getintocode_node/package.json'
-              }
-            }
-        }
+                snykSecurity(
+                // organisation: 'cloudbees',
+                severity: 'low',
+                snykInstallation: 'snyk-latest',
+                snykTokenId: 'Snyk-Jenkins',
+                targetFile: 'package.json',
+                failOnIssues: 'true'
+                )		
+      }
         // stage('Build') {
         //     echo "Build"
         // }
