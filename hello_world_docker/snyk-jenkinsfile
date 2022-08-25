@@ -35,10 +35,10 @@ spec:
   }
   stages {
     stage('Snyk Scan') {
-      failFast true
-      environment {
-        SNYK_TOKEN = credentials('Synk')
-      }	
+    //   failFast true
+    //   environment {
+    //     SNYK_TOKEN = credentials('Synk')
+    //   }	
       parallel {
         // stage('dependency scan') {
         //   steps {
