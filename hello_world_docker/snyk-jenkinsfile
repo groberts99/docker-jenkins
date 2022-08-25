@@ -57,17 +57,18 @@ spec:
         // }
         stage('docker scan') {
           steps {
-            withCredentials([string(credentialsId: 'snyk-secret', variable: 'snyk-secret')])
-            container('snyk-docker') {
-              sh """
-                docker build -t python-project ./hello_world_docker
-                snyk auth Synk
-                snyk test --json \
-                  --docker python-project:latest \
-                  --file=Dockerfile \
-                  --severity-threshold=high \
-                  --project-name=project-python
-              """
+            withCredentials([string(credentialsId: 'snyk-secret', variable: 'snyk-secret')]) {
+                container('snyk-docker') {
+                    sh """
+                        docker build -t python-project ./hello_world_docker
+                        snyk auth ${snyk-secret}
+                        snyk test --json \
+                        --docker python-project:latest \
+                        --file=Dockerfile \
+                        --severity-threshold=high \
+                        --project-name=project-python
+                    """
+                }
             }
           }
         }
