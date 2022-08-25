@@ -39,7 +39,7 @@ spec:
     //   environment {
     //     SNYK_TOKEN = credentials('Synk')
     //   }	
-    withCredentials([string(credentialsId: 'snyk-secret', variable: 'snyk-secret')])
+    
       parallel {
         // stage('dependency scan') {
         //   steps {
@@ -57,6 +57,7 @@ spec:
         // }
         stage('docker scan') {
           steps {
+            withCredentials([string(credentialsId: 'snyk-secret', variable: 'snyk-secret')])
             container('snyk-docker') {
               sh """
                 docker build -t python-project ./hello_world_docker
