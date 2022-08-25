@@ -62,7 +62,7 @@ spec:
                 snyk auth d32cae39-1eb8-4440-86e9-1c53ed9e86e3
                 snyk test --json \
                   --docker python-project:latest \
-                  --file=Dockerfile \
+                  --file=./hello_world_docker/Dockerfile \
                   --severity-threshold=high \
                   --project-name=project-python
               """
