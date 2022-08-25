@@ -37,7 +37,7 @@ spec:
     stage('Snyk Scan') {
       failFast true
       environment {
-        SNYK_TOKEN = credentials('snyk-token')
+        SNYK_TOKEN = credentials('Synk')
       }	
       parallel {
         // stage('dependency scan') {
