@@ -59,7 +59,7 @@ spec:
             container('snyk-docker') {
               sh """
                 docker build -t python-project ./hello_world_docker
-                snyk auth d32cae39-1eb8-4440-86e9-1c53ed9e86e3
+                snykSecurity snykInstallation: 'Synk', snykTokenId: 'Snyk-Jenkins'
                 snyk test --json \
                   --docker python-project:latest \
                   --file=./hello_world_docker/Dockerfile \
