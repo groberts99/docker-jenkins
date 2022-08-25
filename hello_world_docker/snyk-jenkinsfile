@@ -59,7 +59,12 @@ spec:
             container('snyk-docker') {
               sh """
                 docker build -t python-project ./hello_world_docker
-                
+                snyk auth Synk
+                snyk test --json \
+                  --docker python-project:latest \
+                  --file=Dockerfile \
+                  --severity-threshold=high \
+                  --project-name=project-python
               """
             }
           }
