@@ -75,7 +75,7 @@ spec:
             snykSecurity(
             snykInstallation: 'synk-latest',
             snykTokenId: 'Snyk-Jenkins',
-            targetFile: './hello_world_docker/Dockerfile'
+            targetFile: './getintocode_node/package.json'
             // place other parameters here
             )
           }
