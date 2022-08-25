@@ -59,7 +59,7 @@ spec:
             container('snyk-docker') {
               sh """
                 docker build -t python-project ./hello_world_docker
-                snykSecurity snykInstallation: 'Synk', snykTokenId: 'Snyk-Jenkins'
+                snyk auth d32cae39-1eb8-4440-86e9-1c53ed9e86e3
                 snyk test --json \
                   --docker python-project:latest \
                   --file=./hello_world_docker/Dockerfile \
@@ -67,6 +67,17 @@ spec:
                   --project-name=project-python
               """
             }
+          }
+        }
+        stage('docker scan snyk plugin') {
+          steps {
+            echo 'Testing...'
+            snykSecurity(
+            snykInstallation: 'Snyk',
+            snykTokenId: 'd32cae39-1eb8-4440-86e9-1c53ed9e86e3',
+            targetFile: './hello_world_docker/Dockerfile'
+            // place other parameters here
+            )
           }
         }
       }
