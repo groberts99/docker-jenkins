@@ -35,11 +35,10 @@ spec:
   }
   stages {
     stage('Snyk Scan') {
-    //   failFast true
-    //   environment {
-    //     SNYK_TOKEN = credentials('Synk')
-    //   }	
-    
+      failFast true
+      environment {
+        SNYK_TOKEN = credentials('snyk-token')
+      }	
       parallel {
         // stage('dependency scan') {
         //   steps {
@@ -57,18 +56,16 @@ spec:
         // }
         stage('docker scan') {
           steps {
-            withCredentials([string(credentialsId: 'snyk-secret', variable: 'snyk-secret')]) {
-                container('snyk-docker') {
-                    sh """
-                        docker build -t python-project ./hello_world_docker
-                        snyk auth ${snyk-secret}
-                        snyk test --json \
-                        --docker python-project:latest \
-                        --file=Dockerfile \
-                        --severity-threshold=high \
-                        --project-name=project-python
-                    """
-                }
+            container('snyk-docker') {
+              sh """
+                docker build -t python-project ./hello_world_docker
+                snyk auth ${SNYK_TOKEN}
+                snyk test --json \
+                  --docker python-project:latest \
+                  --file=Dockerfile \
+                  --severity-threshold=high \
+                  --project-name=project-python
+              """
             }
           }
         }
