@@ -74,7 +74,7 @@ spec:
             echo 'Testing...'
             snykSecurity(
             snykInstallation: 'synk-latest',
-            snykTokenId: 'd32cae39-1eb8-4440-86e9-1c53ed9e86e3',
+            snykTokenId: 'Snyk-Jenkins',
             targetFile: './hello_world_docker/Dockerfile'
             // place other parameters here
             )
