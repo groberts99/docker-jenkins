@@ -16,7 +16,7 @@ spec:
     image: snyk/snyk-cli:docker
     command:
     - /bin/cat
-    tty: tru
+    tty: true
     env:
     - name: DOCKER_HOST
       value: tcp://localhost:2375
