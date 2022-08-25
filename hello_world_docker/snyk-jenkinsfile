@@ -39,6 +39,7 @@ spec:
     //   environment {
     //     SNYK_TOKEN = credentials('Synk')
     //   }	
+    withCredentials([string(credentialsId: 'snyk-secret', variable: 'snyk-secret')])
       parallel {
         // stage('dependency scan') {
         //   steps {
@@ -70,6 +71,7 @@ spec:
           }
         }
       }
+     }
     }
   }
 }
